@@ -1,2 +1,5 @@
 Jenkinsfile
 Dockerfile
+__pycache*
+*.xml
+.coverage
