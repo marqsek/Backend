@@ -1,6 +1,7 @@
 def imageName="marqsek/backend"
 def dockerRegistry=""
 def registryCredentials="dockerhub"
+def dockerTag=""
 
 pipeline {
     agent {
@@ -59,6 +60,9 @@ pipeline {
         always {
             junit testResults: "test-results/*.xml"
             cleanWs()
+        }
+        success {
+            build wait: false, job: 'App_of_apps', parameters: [string(name: 'backendDockerTag', value: '$dockerTag'), string(name: 'frontendDockerTag', value: '')]
         }
 	}
 }
